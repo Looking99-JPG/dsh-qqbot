@@ -101,15 +101,19 @@ npx @deepseek-ai/dsh web --patch /path/to/dsh-qqbot/cordis.dev.yml
   config:
     mode: workspace-write
 
-# 2) 审批改为询问
+# 2) 挂上受约束的执行器 —— 只有策略没有执行器 = 命令仍走本地执行器，约束不生效
+- id: bash
+  name: '@deepseek-ai/dsh-bash-sandbox'   # Windows 用 pwsh 时改挂 @deepseek-ai/dsh-pwsh-sandbox
+
+# 3) 审批改为询问
 - id: approval
   name: '@deepseek-ai/dsh-user-approval'
   config:
     policy: ask
 
-# 3) 关掉不需要的执行工具：删除 tool-bash / tool-fs / tool-web 三行
+# 4) 关掉不需要的执行工具：删除 tool-bash / tool-fs / tool-web 三行
 
-# 4) 访问控制改白名单
+# 5) 访问控制改白名单
 access:
   c2cMode: allowlist
   groupMode: allowlist
