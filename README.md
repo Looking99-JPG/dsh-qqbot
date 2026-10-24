@@ -90,6 +90,8 @@ npx @deepseek-ai/dsh web --patch /path/to/dsh-qqbot/cordis.dev.yml
 
 > ⚠️ 示例配置下，四档权限没有执行者、审批不会弹出。请按需收紧，不要直接上线。
 
+> 本表指**仓库里的示例 `cordis.yml`**。若用 `dsh plugin add` 把插件装进现有 profile，沙箱/审批沿用该 profile（默认 `workspace-write` + `ask`），不是下面这套裸默认。
+
 ### 收紧示例
 
 ```yaml
@@ -124,7 +126,7 @@ access:
 
 - 只做聊天/查询：不挂 `tool-bash`、`tool-fs`、`tool-web`；
 - 必须用工具时：`workspace-write` + `ask` + `allowlist`；
-- 不要在公开群使用 `danger-full-access`（它会连带把审批设为 `never`）。
+- 不要在公开群使用 `danger-full-access`——它会把审批设为 `never`、沙箱直接 bypass（即使你挂了 `sandbox` 也一样）。
 
 > 本文只描述默认值与收紧方法；具体调用链与复现步骤请走 security 渠道或 issue 讨论，不在文档里展开。
 
